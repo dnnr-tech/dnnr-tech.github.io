@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="TJ Near and Trending - Find amazing Trader Joe's products and trending items">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="TJ Near and Trending">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>TJ Near and Trending</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Smart App Banner for iOS -->
+  <meta name="apple-itunes-app" content="app-id=id6744344637">
+
+  <!-- Open Graph meta tags for better social sharing -->
+  <meta property="og:title" content="TJ Near and Trending">
+  <meta property="og:description" content="Find amazing Trader Joe's products and trending items">
+  <meta property="og:image" content="https://tjnearhot.mrsap.com/icons/Icon-512.png">
+  <meta property="og:url" content="https://tjnearhot.mrsap.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TJ Near and Trending">
+  <meta name="twitter:description" content="Find amazing Trader Joe's products and trending items">
+  <meta name="twitter:image" content="https://tjnearhot.mrsap.com/icons/Icon-512.png">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loading-logo {
+      width: 80px;
+      height: 80px;
+      background: #C81E25;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 32px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #C81E25;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    
+    .loading-text {
+      font-size: 16px;
+      color: #666;
+      text-align: center;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .flutter-loaded #loading {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .loading-logo {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+      
+      .loading-text {
+        font-size: 14px;
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading">
+    <div class="loading-logo">TJ</div>
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading TJ Near and Trending...</div>
+  </div>
+
+  <script>
+    // Service Worker 등록
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=1506190016');
+      });
+    }
+
+    // 네이티브 앱 딥링크 시도
+    function attemptDeepLink() {
+      const path = window.location.pathname;
+      const isProductPage = path.includes('/product/') || path.includes('/p/');
+      
+      if (isProductPage && isMobile()) {
+        const productId = extractProductId(path);
+        if (productId) {
+          tryOpenNativeApp(productId);
+        }
+      }
+    }
+
+    function extractProductId(path) {
+      const segments = path.split('/').filter(s => s);
+      if (segments.length >= 2 && (segments[0] === 'product' || segments[0] === 'p')) {
+        return segments[1];
+      }
+      return null;
+    }
+
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    function tryOpenNativeApp(productId) {
+      const deepLink = `tjnearhot://product/${productId}`;
+      
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = deepLink;
+      document.body.appendChild(iframe);
+      
+      setTimeout(() => {
+        if (iframe.parentNode) {
+          iframe.parentNode.removeChild(iframe);
+        }
+      }, 1000);
+    }
+
+    // 페이지 로드 시 딥링크 시도
+    document.addEventListener('DOMContentLoaded', attemptDeepLink);
+
+    // Flutter 앱 로드 완료 시 로딩 화면 숨김
+    window.addEventListener('flutter-first-frame', function() {
+      document.body.classList.add('flutter-loaded');
+    });
+  </script>
+  
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

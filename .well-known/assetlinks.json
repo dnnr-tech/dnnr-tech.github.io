@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "tech.dnnr.tjnearhot",
+    "sha256_cert_fingerprints": ["83:06:0C:1D:6F:AD:32:EC:50:A8:EB:F5:EE:81:75:33:AE:F0:39:1F:E9:8E:7D:CB:92:8B:CA:9C:2A:4C:1E:C4"]
+  }
+}]
