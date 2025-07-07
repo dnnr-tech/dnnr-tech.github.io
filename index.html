@@ -121,6 +121,15 @@
   </div>
 
   <script>
+    // GitHub Pages SPA 처리를 위한 해시 복구
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+
     // Service Worker 등록
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {

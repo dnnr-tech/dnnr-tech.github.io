@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TJ Near and Trending</title>
+  <script>
+    // GitHub Pages SPA 처리를 위한 리다이렉트
+    (function() {
+      var l = window.location;
+      var currentPath = l.pathname;
+      
+      // 딥링크 처리 - 앱이 있으면 앱 실행, 없으면 앱스토어로
+      if (currentPath.includes('/p/') || currentPath.includes('/product/')) {
+        var productId = extractProductId(currentPath);
+        if (productId && isMobile()) {
+          tryOpenNativeApp(productId);
+          return;
+        }
+      }
+      
+      // 일반 SPA 라우팅 처리
+      sessionStorage.redirect = l.href;
+      l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : ''));
+    })();
+
+    function extractProductId(path) {
+      const segments = path.split('/').filter(s => s);
+      if (segments.length >= 2 && (segments[0] === 'product' || segments[0] === 'p')) {
+        return segments[1];
+      }
+      return null;
+    }
+
+    function isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    function tryOpenNativeApp(productId) {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isAndroid = /Android/.test(navigator.userAgent);
+      
+      if (isIOS) {
+        // iOS Universal Links 시도
+        const universalLink = `https://tjnearhot.mrsap.com/p/${productId}`;
+        const appScheme = `tjnearhot://product/${productId}`;
+        
+        // 앱 스킴 시도
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = appScheme;
+        document.body.appendChild(iframe);
+        
+        // 2초 후 앱이 열리지 않으면 App Store로
+        setTimeout(() => {
+          window.location.href = 'https://apps.apple.com/app/id6744344637';
+        }, 2000);
+        
+      } else if (isAndroid) {
+        // Android Intent 시도
+        const intent = `intent://product/${productId}#Intent;scheme=tjnearhot;package=tech.dnnr.tjnearhot;S.browser_fallback_url=https://play.google.com/store/apps/details?id=tech.dnnr.tjnearhot;end`;
+        window.location.href = intent;
+      } else {
+        // 데스크톱에서는 일반 SPA 처리
+        sessionStorage.redirect = window.location.href;
+        window.location.replace('/');
+      }
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
