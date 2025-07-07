@@ -154,18 +154,49 @@
     }
 
     function tryOpenNativeApp(productId) {
-      const deepLink = `tjnearhot://product/${productId}`;
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isAndroid = /Android/.test(navigator.userAgent);
       
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = deepLink;
-      document.body.appendChild(iframe);
-      
-      setTimeout(() => {
-        if (iframe.parentNode) {
-          iframe.parentNode.removeChild(iframe);
-        }
-      }, 1000);
+      if (isIOS) {
+        // iOS에서 앱 실행 시도
+        const deepLink = `tjnearhot://product/${productId}`;
+        
+        // 즉시 딥링크 시도
+        window.location.href = deepLink;
+        
+        // 백업으로 iframe 방식도 시도
+        setTimeout(() => {
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = deepLink;
+          document.body.appendChild(iframe);
+          
+          setTimeout(() => {
+            if (iframe.parentNode) {
+              iframe.parentNode.removeChild(iframe);
+            }
+          }, 1000);
+        }, 500);
+        
+      } else if (isAndroid) {
+        // Android Intent 방식
+        const intent = `intent://product/${productId}#Intent;scheme=tjnearhot;package=tech.dnnr.tjnearhot;end`;
+        window.location.href = intent;
+        
+      } else {
+        // 데스크톱은 일반 딥링크 시도
+        const deepLink = `tjnearhot://product/${productId}`;
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = deepLink;
+        document.body.appendChild(iframe);
+        
+        setTimeout(() => {
+          if (iframe.parentNode) {
+            iframe.parentNode.removeChild(iframe);
+          }
+        }, 1000);
+      }
     }
 
     // 페이지 로드 시 딥링크 시도

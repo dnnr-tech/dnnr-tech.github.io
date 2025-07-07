@@ -41,25 +41,58 @@
       const isAndroid = /Android/.test(navigator.userAgent);
       
       if (isIOS) {
-        // iOS Universal Links 시도
-        const universalLink = `https://tjnearhot.mrsap.com/p/${productId}`;
-        const appScheme = `tjnearhot://product/${productId}`;
+        // iOS에서 앱 설치 감지 및 딥링크 시도
+        let appOpened = false;
         
-        // 앱 스킴 시도
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appScheme;
-        document.body.appendChild(iframe);
+        // 1. Universal Links 시도 (iOS 9+)
+        const universalLink = `tjnearhot://product/${productId}`;
+        window.location.href = universalLink;
         
-        // 2초 후 앱이 열리지 않으면 App Store로
+        // 2. 백업으로 커스텀 스킴 시도
         setTimeout(() => {
-          window.location.href = 'https://apps.apple.com/app/id6744344637';
+          if (!appOpened) {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = universalLink;
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+              document.body.removeChild(iframe);
+            }, 1000);
+          }
+        }, 500);
+        
+        // 3. 앱이 열리지 않으면 App Store로
+        const startTime = Date.now();
+        setTimeout(() => {
+          const timeElapsed = Date.now() - startTime;
+          // 앱이 열렸다면 페이지가 숨겨졌을 것이므로 시간이 더 오래 걸림
+          if (timeElapsed < 2100 && !document.hidden) {
+            window.location.href = 'https://apps.apple.com/app/id6744344637';
+          }
         }, 2000);
         
+        // 페이지 visibility 변경 감지 (앱이 열렸을 때)
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            appOpened = true;
+          }
+        });
+        
       } else if (isAndroid) {
-        // Android Intent 시도
+        // Android Intent 링크 (더 정확한 형식)
         const intent = `intent://product/${productId}#Intent;scheme=tjnearhot;package=tech.dnnr.tjnearhot;S.browser_fallback_url=https://play.google.com/store/apps/details?id=tech.dnnr.tjnearhot;end`;
+        
+        // 즉시 Intent 실행
         window.location.href = intent;
+        
+        // 백업: 3초 후에도 페이지가 그대로 있으면 Play Store로
+        setTimeout(() => {
+          if (!document.hidden) {
+            window.location.href = 'https://play.google.com/store/apps/details?id=tech.dnnr.tjnearhot';
+          }
+        }, 3000);
+        
       } else {
         // 데스크톱에서는 일반 SPA 처리
         sessionStorage.redirect = window.location.href;
