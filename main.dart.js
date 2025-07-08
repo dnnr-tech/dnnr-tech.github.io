@@ -76594,7 +76594,7 @@ A.Ss.prototype={}
 A.qS.prototype={
 M(a){var s=null,r=this.c
 r=r==null?s:"GoException: "+r.a
-return A.aaF(!0,A.jQ(A.hl(A.b([B.PI,B.wY,A.em(r==null?"page not found":r,s,s,s,s),B.wY,new A.Bg(new A.a0e(a),B.PH,s)],t.E),B.a8,B.cL,B.aK),s,s),!0)}}
+return A.aaF(!0,A.jQ(A.hl(A.b([B.PI,B.wY,A.em(r==null?"page not found":r,s,s,s,s),B.wY,new A.Bg(new A.a0e(a),B.PG,s)],t.E),B.a8,B.cL,B.aK),s,s),!0)}}
 A.a0e.prototype={
 $0(){return A.auw(this.a).Gn(0,"/",null)},
 $S:0}
@@ -78053,7 +78053,7 @@ gt(a){return B.d.gt(this.b)}}
 A.a3n.prototype={}
 A.r7.prototype={
 M(a){var s=null,r=t.E
-return A.aqh(s,s,A.jQ(A.fI(A.hl(A.b([A.aoX(A.ew(25),A.auF("icons/Icon-512.png",B.hy,120,120)),B.L7,A.em("TJ Near and Trending",s,s,B.h_.acL(32),B.bu),B.wX,A.em("Find amazing Trader Joe's products and trending items near you",s,s,B.jw.CZ(B.b9,18),B.bu),B.L8,A.hl(A.b([A.kF(A.aua(B.PL,new A.a2r(this,a),A.aub(s,s,B.bC,s,s,s,s,s,s,s,s,s,B.l8,s,new A.cM(A.ew(12),B.p),s,s,s,s)),s,1/0)],r),B.a8,B.ak,B.aK)],r),B.a8,B.cL,B.aK),B.v,s,B.k9,s,s,s,B.la,s),s,s))},
+return A.aqh(s,s,A.jQ(A.fI(A.hl(A.b([A.aoX(A.ew(25),A.auF("icons/Icon-512.png",B.hy,120,120)),B.L7,A.em("TJ Near & Hot",s,s,B.h_.acL(32),B.bu),B.wX,A.em("Find Trending Picks at Your Nearby Trader Joe's",s,s,B.jw.CZ(B.b9,18),B.bu),B.L8,A.hl(A.b([A.kF(A.aua(B.PL,new A.a2r(this,a),A.aub(s,s,B.bC,s,s,s,s,s,s,s,s,s,B.l8,s,new A.cM(A.ew(12),B.p),s,s,s,s)),s,1/0)],r),B.a8,B.ak,B.aK)],r),B.a8,B.cL,B.aK),B.v,s,B.k9,s,s,s,B.la,s),s,s))},
 a9C(a){A.azI(new A.a2q(),a,t.z)}}
 A.a2r.prototype={
 $0(){var s,r,q=window.navigator.userAgent
@@ -78135,7 +78135,7 @@ n.push(A.aqf(A.b([s.Ii(B.CA,o==null?0:o,"Likes"),B.wU,s.Ii(B.Cy,s.d.as.b,"Commen
 Ii(a,b,c){var s=null,r=A.ew(20)
 return A.fI(A.aqf(A.b([A.r8(a,B.b9,s,16),B.L6,A.em(B.f.k(b),s,s,B.xk.acX(B.b9,B.ah),s)],t.E),B.a8,B.ak,B.dZ),B.v,s,s,new A.d9(B.ev,s,s,r,s,s,B.au),s,s,B.BN,s)},
 ZJ(){var s=null,r=A.b([B.bC,A.aS(204,B.bC.gm(0)>>>16&255,B.bC.gm(0)>>>8&255,B.bC.gm(0)&255)],t.t_),q=A.ew(16)
-return A.fI(A.hl(A.b([B.CH,B.wW,B.PF,B.L9,B.PG,B.ef,A.kF(A.aua(B.PM,new A.ajO(this),A.aub(s,s,B.k,s,s,s,s,s,s,B.bC,s,s,B.l8,s,new A.cM(A.ew(12),B.p),s,s,s,s)),s,1/0)],t.E),B.a8,B.ak,B.aK),B.v,s,s,new A.d9(s,s,s,q,s,new A.rm(B.cr,B.yb,B.h2,r,s,s),B.au),s,s,B.BV,1/0)},
+return A.fI(A.hl(A.b([B.CH,B.wW,B.PF,B.L9,B.PH,B.ef,A.kF(A.aua(B.PM,new A.ajO(this),A.aub(s,s,B.k,s,s,s,s,s,s,B.bC,s,s,B.l8,s,new A.cM(A.ew(12),B.p),s,s,s,s)),s,1/0)],t.E),B.a8,B.ak,B.aK),B.v,s,s,new A.d9(s,s,s,q,s,new A.rm(B.cr,B.yb,B.h2,r,s,s),B.au),s,s,B.BV,1/0)},
 a8_(){var s=this.c
 s.toString
 A.azI(new A.ajV(this),s,t.z)}}
@@ -83353,12 +83353,12 @@ B.Mp=new A.u(!0,B.k,null,"Roboto",null,null,null,null,null,null,null,null,null,n
 B.Pl=new A.u(!0,B.k,null,"Roboto",null,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"whiteMountainView labelMedium",null,null,null,null)
 B.Ox=new A.u(!0,B.k,null,"Roboto",null,null,null,null,null,null,null,null,null,null,null,null,null,B.e,null,null,null,"whiteMountainView labelSmall",null,null,null,null)
 B.PE=new A.dW(B.OK,B.MO,B.Nz,B.P_,B.MB,B.MA,B.Md,B.Ov,B.Pa,B.MC,B.MZ,B.Oq,B.Mp,B.Pl,B.Ox)
-B.Nh=new A.u(!0,B.k,null,null,null,null,14,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.PG=new A.ea("Download the app to explore all Trader Joe's products,\nfind nearby stores, and get personalized recommendations.",null,B.Nh,B.bu,null,null,null)
 B.No=new A.u(!0,B.k,null,null,null,null,20,B.cG,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.PF=new A.ea("Get the Full Experience",null,B.No,null,null,null,null)
 B.NL=new A.u(!0,B.k,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.PH=new A.ea("Go to home page",null,B.NL,null,null,null,null)
+B.PG=new A.ea("Go to home page",null,B.NL,null,null,null,null)
+B.Nh=new A.u(!0,B.k,null,null,null,null,14,null,null,null,null,null,1.4,null,null,null,null,null,null,null,null,null,null,null,null,null)
+B.PH=new A.ea("Discover trending products, find store locations,\nand share your favorite picks with friends.",null,B.Nh,B.bu,null,null,null)
 B.xl=new A.ea("\ud83d\udcf1 iOS App Store",null,null,null,null,null,null)
 B.xm=new A.ea("Download TJ Near and Trending",null,null,null,null,null,null)
 B.PI=new A.ea("Page Not Found",null,B.h0,null,null,null,null)
