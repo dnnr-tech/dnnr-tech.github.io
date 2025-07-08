@@ -62,15 +62,9 @@
     .loading-logo {
       width: 80px;
       height: 80px;
-      background: #C81E25;
       border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-bottom: 20px;
-      font-size: 32px;
-      color: white;
-      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(200, 30, 37, 0.3);
     }
     
     .loading-spinner {
@@ -115,7 +109,7 @@
 <body>
   <!-- Loading Screen -->
   <div id="loading">
-    <div class="loading-logo">TJ</div>
+    <img src="icons/Icon-512.png" class="loading-logo" alt="TJ Near and Trending">
     <div class="loading-spinner"></div>
     <div class="loading-text">Loading TJ Near and Trending...</div>
   </div>
@@ -124,7 +118,7 @@
     // Service Worker 등록
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=2530455758');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=3013334952');
       });
     }
 
@@ -154,49 +148,18 @@
     }
 
     function tryOpenNativeApp(productId) {
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      const isAndroid = /Android/.test(navigator.userAgent);
+      const deepLink = `tjnearhot://product/${productId}`;
       
-      if (isIOS) {
-        // iOS에서 앱 실행 시도
-        const deepLink = `tjnearhot://product/${productId}`;
-        
-        // 즉시 딥링크 시도
-        window.location.href = deepLink;
-        
-        // 백업으로 iframe 방식도 시도
-        setTimeout(() => {
-          const iframe = document.createElement('iframe');
-          iframe.style.display = 'none';
-          iframe.src = deepLink;
-          document.body.appendChild(iframe);
-          
-          setTimeout(() => {
-            if (iframe.parentNode) {
-              iframe.parentNode.removeChild(iframe);
-            }
-          }, 1000);
-        }, 500);
-        
-      } else if (isAndroid) {
-        // Android Intent 방식
-        const intent = `intent://product/${productId}#Intent;scheme=tjnearhot;package=tech.dnnr.tjnearhot;end`;
-        window.location.href = intent;
-        
-      } else {
-        // 데스크톱은 일반 딥링크 시도
-        const deepLink = `tjnearhot://product/${productId}`;
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = deepLink;
-        document.body.appendChild(iframe);
-        
-        setTimeout(() => {
-          if (iframe.parentNode) {
-            iframe.parentNode.removeChild(iframe);
-          }
-        }, 1000);
-      }
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = deepLink;
+      document.body.appendChild(iframe);
+      
+      setTimeout(() => {
+        if (iframe.parentNode) {
+          iframe.parentNode.removeChild(iframe);
+        }
+      }, 1000);
     }
 
     // 페이지 로드 시 딥링크 시도
