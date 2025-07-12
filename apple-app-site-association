@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3A97MMQ86A.tech.dnnr.tjnearhot",
+        "paths": [
+          "/product/*",
+          "/p/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["3A97MMQ86A.tech.dnnr.tjnearhot"]
+  }
+}
