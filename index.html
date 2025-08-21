@@ -62,9 +62,15 @@
     .loading-logo {
       width: 80px;
       height: 80px;
+      background: #C81E25;
       border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(200, 30, 37, 0.3);
+      font-size: 32px;
+      color: white;
+      font-weight: bold;
     }
     
     .loading-spinner {
@@ -109,36 +115,39 @@
 <body>
   <!-- Loading Screen -->
   <div id="loading">
-    <img src="icons/Icon-512.png" class="loading-logo" alt="TJ Near & Hot">
+    <div class="loading-logo">TJ</div>
     <div class="loading-spinner"></div>
-    <div class="loading-text">Loading TJ Near & Hot...</div>
+    <div class="loading-text">Loading TJ Near and Trending...</div>
   </div>
 
   <script>
     // Service Worker 등록
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=628858418');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=4175537470');
       });
     }
 
     // 네이티브 앱 딥링크 시도
     function attemptDeepLink() {
       const path = window.location.pathname;
-      const isProductPage = path.includes('/product/') || path.includes('/p/');
+      const linkInfo = extractLinkInfo(path);
       
-      if (isProductPage && isMobile()) {
-        const productId = extractProductId(path);
-        if (productId) {
-          tryOpenNativeApp(productId);
-        }
+      if (linkInfo && isMobile()) {
+        tryOpenNativeApp(linkInfo.type, linkInfo.id);
       }
     }
 
-    function extractProductId(path) {
+    function extractLinkInfo(path) {
       const segments = path.split('/').filter(s => s);
-      if (segments.length >= 2 && (segments[0] === 'product' || segments[0] === 'p')) {
-        return segments[1];
+      if (segments.length >= 2) {
+        const type = segments[0];
+        const id = segments[1];
+        
+        // 지원하는 경로 타입들
+        if (['product', 'p', 'recipe', 'r'].includes(type)) {
+          return { type, id };
+        }
       }
       return null;
     }
@@ -147,8 +156,19 @@
       return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    function tryOpenNativeApp(productId) {
-      const deepLink = `tjnearhot://product/${productId}`;
+    function tryOpenNativeApp(type, id) {
+      let deepLink;
+      
+      // 타입에 따라 딥링크 구성
+      if (type === 'recipe' || type === 'r') {
+        deepLink = `tjnearhot://recipe/${id}`;
+      } else if (type === 'product' || type === 'p') {
+        deepLink = `tjnearhot://product/${id}`;
+      } else {
+        return; // 지원하지 않는 타입
+      }
+      
+      console.log('Attempting deeplink:', deepLink);
       
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
