@@ -2,25 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>TJ Near & Hot - Redirecting...</title>
+  <title>TJ Near & Hot</title>
   <script type="text/javascript">
-    // GitHub Pages SPA 라우팅 해결책
-    // 404 페이지에서 실제 SPA 라우트로 리다이렉트
-    var pathSegmentsToKeep = 0;
-    var location = window.location;
-    var redirect = location.href.split(location.origin)[1];
-    
-    // 쿼리 파라미터로 원래 경로를 전달하며 index.html로 리다이렉트
-    location.replace(location.origin + 
-      (pathSegmentsToKeep && location.pathname.indexOf('/', 1) !== -1 
-        ? location.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/'
-        : '/'
-      ) + 
-      '?redirect=' + encodeURIComponent(redirect.slice(1))
-    );
+    // GitHub Pages SPA fallback
+    // 존재하지 않는 경로를 index.html로 리다이렉트
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting to TJ Near & Hot...</p>
+  <script type="text/javascript">
+    // 현재 경로를 sessionStorage에 저장하고 index.html로 리다이렉트
+    sessionStorage.redirect = location.href;
+    location.replace(location.origin + '/');
+  </script>
 </body>
 </html>

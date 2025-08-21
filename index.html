@@ -117,14 +117,23 @@
   <div id="loading">
     <div class="loading-logo">TJ</div>
     <div class="loading-spinner"></div>
-    <div class="loading-text">Loading TJ Near and Trending...</div>
+    <div class="loading-text">Loading TJ Near & Hot...</div>
   </div>
 
   <script>
+    // GitHub Pages SPA fallback 처리
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+
     // Service Worker 등록
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=3885111208');
+        navigator.serviceWorker.register('flutter_service_worker.js?v=2574618712');
       });
     }
 
