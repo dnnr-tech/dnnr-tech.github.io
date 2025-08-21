@@ -6,7 +6,9 @@
         "appID": "3A97MMQ86A.tech.dnnr.tjnearhot",
         "paths": [
           "/product/*",
-          "/p/*"
+          "/p/*",
+          "/recipe/*",
+          "/r/*"
         ]
       }
     ]
