@@ -3,6 +3,9 @@
   "target": {
     "namespace": "android_app",
     "package_name": "tech.dnnr.tjnearhot",
-    "sha256_cert_fingerprints": ["83:06:0C:1D:6F:AD:32:EC:50:A8:EB:F5:EE:81:75:33:AE:F0:39:1F:E9:8E:7D:CB:92:8B:CA:9C:2A:4C:1E:C4"]
+    "sha256_cert_fingerprints": [
+      "45:6A:B5:B1:F8:4A:4F:37:1D:E8:A6:FA:0A:76:29:EA:5F:58:02:36:33:82:7C:B0:03:9B:FA:D7:74:D5:75:CF",
+      "83:06:0C:1D:6F:AD:32:EC:50:A8:EB:F5:EE:81:75:33:AE:F0:39:1F:E9:8E:7D:CB:92:8B:CA:9C:2A:4C:1E:C4"
+    ]
   }
 }]
